@@ -7,7 +7,12 @@ public class WorldConstraint : MonoBehaviour
 
     private void FixedUpdate()
     {
+        WorldAttraction();
+    }
+
+    private void WorldAttraction()
+    {
         Quaternion rotation = Quaternion.FromToRotation(-transform.up, _world.position - transform.position);
-        transform.rotation = rotation * transform.rotation; 
+        transform.rotation = rotation * transform.rotation;
     }
 }
