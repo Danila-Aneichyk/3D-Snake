@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Player
 {
@@ -12,51 +11,42 @@ namespace Player
 
         [SerializeField] private FixedJoystick _joystick;
 
-        float gravity = 100;
-        bool OnGround = false;
+        private float _gravity = 100;
 
-        float distanceToGround;
-        Vector3 Groundnormal;
+        private Vector3 _groundNormal;
 
-        private Rigidbody rb;
+        private Rigidbody _rb;
 
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-            rb = GetComponent<Rigidbody>();
-            rb.freezeRotation = true;
+            _rb = GetComponent<Rigidbody>();
+            _rb.freezeRotation = true;
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
+        {
+            GroundCheck();
+            UseGravity();
+            Rotate();
+        }
+
+        private void GroundCheck()
         {
             RaycastHit hit = new RaycastHit();
             if (Physics.Raycast(transform.position, -transform.up, out hit, 10))
             {
-                distanceToGround = hit.distance;
-                Groundnormal = hit.normal;
-
-                if (distanceToGround <= 0.2f)
-                {
-                    OnGround = true;
-                }
-                else
-                {
-                    OnGround = false;
-                }
+                _groundNormal = hit.normal;
             }
+        }
 
-            //GRAVITY and ROTATION
+        private void FixedUpdate()
+        {
+            _rb.velocity = transform.forward * speed;
+        }
 
-            Vector3 gravDirection = (transform.position - Planet.transform.position).normalized;
-
-            if (OnGround == false)
-            {
-                rb.AddForce(gravDirection * -gravity);
-            }
-
-
-            Quaternion toRotation = Quaternion.FromToRotation(transform.up, Groundnormal) * transform.rotation;
+        private void Rotate()
+        {
+            Quaternion toRotation = Quaternion.FromToRotation(transform.up, _groundNormal) * transform.rotation;
             transform.rotation = toRotation;
 
             float rotationInput = _joystick.Horizontal;
@@ -64,9 +54,10 @@ namespace Player
             transform.Rotate(0, rotationInput * rotationSpeed * Time.deltaTime, 0);
         }
 
-        void FixedUpdate()
+        private void UseGravity()
         {
-            rb.velocity = transform.forward * speed;
+            Vector3 gravDirection = (transform.position - Planet.transform.position).normalized;
+            _rb.AddForce(gravDirection * -_gravity);
         }
     }
 }
