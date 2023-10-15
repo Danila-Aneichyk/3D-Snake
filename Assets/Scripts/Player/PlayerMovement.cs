@@ -7,10 +7,8 @@ namespace Player
     public class PlayerMovement : MonoBehaviour
     {
         public GameObject Planet;
-        public GameObject PlayerPlaceholder;
-
         public float speed = 4;
-        public float JumpHeight = 1.2f;
+        public float rotationSpeed = 150; // Скорость вращения
 
         float gravity = 100;
         bool OnGround = false;
@@ -30,27 +28,6 @@ namespace Player
         // Update is called once per frame
         void Update()
         {
-            /*//MOVEMENT
-
-            float x = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
-            float z = Input.GetAxis("Vertical") * Time.deltaTime * speed;
-
-            transform.Translate(x, 0, z);*/
-
-            //Local Rotation
-
-            if (Input.GetKey(KeyCode.E))
-            {
-                transform.Rotate(0, 150 * Time.deltaTime, 0);
-            }
-
-            if (Input.GetKey(KeyCode.Q))
-            {
-                transform.Rotate(0, -150 * Time.deltaTime, 0);
-            }
-
-
-            //GroundControl
 
             RaycastHit hit = new RaycastHit();
             if (Physics.Raycast(transform.position, -transform.up, out hit, 10))
@@ -68,7 +45,6 @@ namespace Player
                 }
             }
 
-
             //GRAVITY and ROTATION
 
             Vector3 gravDirection = (transform.position - Planet.transform.position).normalized;
@@ -78,18 +54,18 @@ namespace Player
                 rb.AddForce(gravDirection * -gravity);
             }
 
-            //
 
             Quaternion toRotation = Quaternion.FromToRotation(transform.up, Groundnormal) * transform.rotation;
             transform.rotation = toRotation;
+
+            float rotationInput = Input.GetAxis("Horizontal");
+
+            transform.Rotate(0, rotationInput * rotationSpeed * Time.deltaTime, 0);
         }
 
-        private void FixedUpdate()
+        void FixedUpdate()
         {
-            // if (OnGround)
-            //{
             rb.velocity = transform.forward * speed;
-            //}
         }
     }
 }
