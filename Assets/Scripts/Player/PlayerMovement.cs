@@ -8,7 +8,9 @@ namespace Player
     {
         public GameObject Planet;
         public float speed = 4;
-        public float rotationSpeed = 150; // Скорость вращения
+        public float rotationSpeed = 150;
+
+        [SerializeField] private FixedJoystick _joystick;
 
         float gravity = 100;
         bool OnGround = false;
@@ -28,7 +30,6 @@ namespace Player
         // Update is called once per frame
         void Update()
         {
-
             RaycastHit hit = new RaycastHit();
             if (Physics.Raycast(transform.position, -transform.up, out hit, 10))
             {
@@ -58,7 +59,7 @@ namespace Player
             Quaternion toRotation = Quaternion.FromToRotation(transform.up, Groundnormal) * transform.rotation;
             transform.rotation = toRotation;
 
-            float rotationInput = Input.GetAxis("Horizontal");
+            float rotationInput = _joystick.Horizontal;
 
             transform.Rotate(0, rotationInput * rotationSpeed * Time.deltaTime, 0);
         }
