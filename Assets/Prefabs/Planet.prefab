@@ -110,5 +110,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e6dad105784d0bba362ed0455b18ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _foodPrefab: {fileID: 0}
-  _sphereTransform: {fileID: 0}
+  _foodPrefab: {fileID: 4333586345976832147, guid: 7d67098a0dbf219468f2cb77853ed83f, type: 3}
+  _sphereTransform: {fileID: 5806145191339060451}

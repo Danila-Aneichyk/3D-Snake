@@ -1,24 +1,25 @@
-﻿using UnityEngine;
+﻿using StaticTags;
+using UnityEngine;
 
 namespace Player
 {
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerMovement : MonoBehaviour
     {
-        public GameObject Planet;
-        public float speed = 4;
-        public float rotationSpeed = 150;
+        [Header("Movement values")]
+        [SerializeField] private float speed = 4;
 
-        [SerializeField] private FixedJoystick _joystick;
-
-        private float _gravity = 100;
-
-        private Vector3 _groundNormal;
-
+        private FixedJoystick _joystick;
         private Rigidbody _rb;
+        private GameObject _planet;
+        private float _rotationSpeed = 150;
+        private float _gravity = 100;
+        private Vector3 _groundNormal;
 
         private void Start()
         {
+            _planet = GameObject.FindGameObjectWithTag(Tags.Planet);
+            _joystick = GameObject.FindGameObjectWithTag(Tags.Joystick).GetComponent<FixedJoystick>();
             _rb = GetComponent<Rigidbody>();
             _rb.freezeRotation = true;
         }
@@ -30,6 +31,11 @@ namespace Player
             Rotate();
         }
 
+        private void FixedUpdate()
+        {
+            _rb.velocity = transform.forward * speed;
+        }
+
         private void GroundCheck()
         {
             RaycastHit hit = new RaycastHit();
@@ -39,24 +45,17 @@ namespace Player
             }
         }
 
-        private void FixedUpdate()
-        {
-            _rb.velocity = transform.forward * speed;
-        }
-
         private void Rotate()
         {
             Quaternion toRotation = Quaternion.FromToRotation(transform.up, _groundNormal) * transform.rotation;
             transform.rotation = toRotation;
-
             float rotationInput = _joystick.Horizontal;
-
-            transform.Rotate(0, rotationInput * rotationSpeed * Time.deltaTime, 0);
+            transform.Rotate(0, rotationInput * _rotationSpeed * Time.deltaTime, 0);
         }
 
         private void UseGravity()
         {
-            Vector3 gravDirection = (transform.position - Planet.transform.position).normalized;
+            Vector3 gravDirection = (transform.position - _planet.transform.position).normalized;
             _rb.AddForce(gravDirection * -_gravity);
         }
     }
