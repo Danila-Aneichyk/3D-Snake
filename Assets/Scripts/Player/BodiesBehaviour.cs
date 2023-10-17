@@ -19,6 +19,11 @@ namespace Player
             _transform = GetComponent<Transform>();
         }
 
+        private void Update()
+        {
+            MoveBodies();
+        }
+
         private void MoveBodies()
         {
             float sqrDistance = _bodiesDistance * _bodiesDistance;
@@ -28,7 +33,9 @@ namespace Player
             {
                 if ((body.position - previousBodyPosition).sqrMagnitude > sqrDistance)
                 {
+                    Vector3 temp = body.position;
                     body.position = previousBodyPosition;
+                    previousBodyPosition = temp;
                 }
             }
         }

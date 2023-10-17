@@ -218,6 +218,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fixed Joystick
       objectReference: {fileID: 0}
+    - target: {fileID: 2929252283123773939, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+      propertyPath: m_TagString
+      value: Joystick
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
 --- !u!224 &319255918 stripped
@@ -545,9 +549,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b92efbd5e9f136642add14bd30dc6cf9, type: 3}
---- !u!1 &2888813661904313747 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2318324437948694289, guid: b92efbd5e9f136642add14bd30dc6cf9, type: 3}
+--- !u!4 &2888813661904313748 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6289146009638572983, guid: b92efbd5e9f136642add14bd30dc6cf9, type: 3}
   m_PrefabInstance: {fileID: 2888813661904313746}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5806145192199813444
@@ -614,6 +618,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7655461539196708474, guid: 217dc9433448e40428c5bdec1d9a5aff, type: 3}
+      propertyPath: _bodies.Array.data[0]
+      value: 
+      objectReference: {fileID: 2888813661904313748}
     - target: {fileID: 7655461539219422018, guid: 217dc9433448e40428c5bdec1d9a5aff, type: 3}
       propertyPath: m_Name
       value: Snake
@@ -664,24 +672,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 217dc9433448e40428c5bdec1d9a5aff, type: 3}
---- !u!1 &7655461539196708473 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7655461539219422018, guid: 217dc9433448e40428c5bdec1d9a5aff, type: 3}
-  m_PrefabInstance: {fileID: 7655461539196708472}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7655461539196708474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7655461539196708473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee2470a6466341bfaba0a50b6864420f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bodyPrefab: {fileID: 2318324437948694289, guid: b92efbd5e9f136642add14bd30dc6cf9, type: 3}
-  _bodies:
-  - {fileID: 2888813661904313747}
-  _bodiesDistance: 4

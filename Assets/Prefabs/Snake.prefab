@@ -190,7 +190,7 @@ MonoBehaviour:
   _bodyPrefab: {fileID: 2318324437948694289, guid: b92efbd5e9f136642add14bd30dc6cf9, type: 3}
   _bodies:
   - {fileID: 0}
-  _bodiesDistance: 4
+  _bodiesDistance: 0.9
 --- !u!1001 &7655461540501259963
 PrefabInstance:
   m_ObjectHideFlags: 0
