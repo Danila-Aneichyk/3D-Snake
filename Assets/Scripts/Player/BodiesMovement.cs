@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Player
 {
-    public class BodiesBehaviour : MonoBehaviour
+    public class BodiesMovement : MonoBehaviour
     {
         [Header("Bodies")]
-        [SerializeField] private GameObject _bodyPrefab;
-        [SerializeField] private List<Transform> _bodies;
+        [SerializeField] internal List<Transform> _bodies;
         [Range(0, 4)]
         [SerializeField] private float _bodiesDistance;
 
@@ -33,9 +31,7 @@ namespace Player
             {
                 if ((body.position - previousBodyPosition).sqrMagnitude > sqrDistance)
                 {
-                    Vector3 temp = body.position;
-                    body.position = previousBodyPosition;
-                    previousBodyPosition = temp;
+                    (body.position, previousBodyPosition) = (previousBodyPosition, body.position);
                 }
             }
         }

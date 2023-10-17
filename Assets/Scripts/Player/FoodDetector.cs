@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class SnakeEating : MonoBehaviour
+    public class FoodDetector : MonoBehaviour
     {
         public Action OnFoodEaten;
 

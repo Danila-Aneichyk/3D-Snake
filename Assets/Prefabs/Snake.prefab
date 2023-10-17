@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 7655461539219422022}
   - component: {fileID: 8751603600557653588}
   - component: {fileID: 7655461539196708474}
+  - component: {fileID: 7655461539196708479}
   m_Layer: 0
   m_Name: Snake
   m_TagString: Untagged
@@ -187,10 +188,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2470a6466341bfaba0a50b6864420f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bodyPrefab: {fileID: 2318324437948694289, guid: b92efbd5e9f136642add14bd30dc6cf9, type: 3}
   _bodies:
   - {fileID: 0}
   _bodiesDistance: 0.9
+--- !u!114 &7655461539196708479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7655461539219422018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eaa1528b30f4f969f6ac90cc3e6a523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bodyPrefab: {fileID: 2318324437948694289, guid: b92efbd5e9f136642add14bd30dc6cf9, type: 3}
+  _foodDetector: {fileID: 8751603600557653588}
+  _bodiesMovement: {fileID: 7655461539196708474}
 --- !u!1001 &7655461540501259963
 PrefabInstance:
   m_ObjectHideFlags: 0

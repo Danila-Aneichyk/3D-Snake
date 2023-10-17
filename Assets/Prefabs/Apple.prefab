@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -798927410345187026}
   m_Layer: 0
   m_Name: Apple
-  m_TagString: Untagged
+  m_TagString: Apple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,7 +42,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4333586345976832147}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.66140753
@@ -59,7 +59,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6251f33155ba0864f86902b9f1f1c900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _world: {fileID: 0}
 --- !u!1001 &6120209841032901478
 PrefabInstance:
   m_ObjectHideFlags: 0
