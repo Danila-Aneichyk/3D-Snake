@@ -2,17 +2,17 @@
 using StaticTags;
 using UnityEngine;
 
-namespace Objects
+namespace Player
 {
-    public class Food : MonoBehaviour
+    public class SnakeEating : MonoBehaviour
     {
         public Action OnFoodEaten;
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag(Tags.Player))
+            if (other.gameObject.CompareTag(Tags.Apple))
             {
-                Destroy(gameObject);
+                Destroy(other.gameObject);
                 OnFoodEaten?.Invoke();
             }
         }
