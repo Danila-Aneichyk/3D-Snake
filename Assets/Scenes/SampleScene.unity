@@ -615,6 +615,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 7655461539196708474, guid: 217dc9433448e40428c5bdec1d9a5aff, type: 3}
+      propertyPath: _bodiesDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7655461539196708474, guid: 217dc9433448e40428c5bdec1d9a5aff, type: 3}
       propertyPath: _bodies.Array.data[0]
       value: 
       objectReference: {fileID: 2888813661904313748}

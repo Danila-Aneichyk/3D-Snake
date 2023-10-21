@@ -33,6 +33,10 @@ namespace Player
                 {
                     (body.position, previousBodyPosition) = (previousBodyPosition, body.position);
                 }
+                else
+                {
+                    break;
+                }   
             }
         }
     }
