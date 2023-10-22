@@ -190,7 +190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bodies:
   - {fileID: 0}
-  _bodiesDistance: 0.9
+  _bodiesDistance: 2
 --- !u!114 &7655461539196708479
 MonoBehaviour:
   m_ObjectHideFlags: 0
