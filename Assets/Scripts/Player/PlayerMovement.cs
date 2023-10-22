@@ -1,4 +1,4 @@
-﻿using System;
+﻿using StaticTags;
 using UnityEngine;
 
 namespace Player
@@ -6,90 +6,57 @@ namespace Player
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerMovement : MonoBehaviour
     {
-        public GameObject Planet;
-        public GameObject PlayerPlaceholder;
+        [Header("Movement values")]
+        [SerializeField] private float speed = 4;
 
-        public float speed = 4;
-        public float JumpHeight = 1.2f;
+        private FixedJoystick _joystick;
+        private Rigidbody _rb;
+        private GameObject _planet;
+        private float _rotationSpeed = 150;
+        private float _gravity = 100;
+        private Vector3 _groundNormal;
 
-        float gravity = 100;
-        bool OnGround = false;
-
-        float distanceToGround;
-        Vector3 Groundnormal;
-
-        private Rigidbody rb;
-
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-            rb = GetComponent<Rigidbody>();
-            rb.freezeRotation = true;
+            _planet = GameObject.FindGameObjectWithTag(Tags.Planet);
+            _joystick = GameObject.FindGameObjectWithTag(Tags.Joystick).GetComponent<FixedJoystick>();
+            _rb = GetComponent<Rigidbody>();
+            _rb.freezeRotation = true;
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
-            /*//MOVEMENT
-
-            float x = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
-            float z = Input.GetAxis("Vertical") * Time.deltaTime * speed;
-
-            transform.Translate(x, 0, z);*/
-
-            //Local Rotation
-
-            if (Input.GetKey(KeyCode.E))
-            {
-                transform.Rotate(0, 150 * Time.deltaTime, 0);
-            }
-
-            if (Input.GetKey(KeyCode.Q))
-            {
-                transform.Rotate(0, -150 * Time.deltaTime, 0);
-            }
-
-
-            //GroundControl
-
-            RaycastHit hit = new RaycastHit();
-            if (Physics.Raycast(transform.position, -transform.up, out hit, 10))
-            {
-                distanceToGround = hit.distance;
-                Groundnormal = hit.normal;
-
-                if (distanceToGround <= 0.2f)
-                {
-                    OnGround = true;
-                }
-                else
-                {
-                    OnGround = false;
-                }
-            }
-
-
-            //GRAVITY and ROTATION
-
-            Vector3 gravDirection = (transform.position - Planet.transform.position).normalized;
-
-            if (OnGround == false)
-            {
-                rb.AddForce(gravDirection * -gravity);
-            }
-
-            //
-
-            Quaternion toRotation = Quaternion.FromToRotation(transform.up, Groundnormal) * transform.rotation;
-            transform.rotation = toRotation;
+            GroundCheck();
+            UseGravity();
+            Rotate();
         }
 
         private void FixedUpdate()
         {
-            // if (OnGround)
-            //{
-            rb.velocity = transform.forward * speed;
-            //}
+            _rb.velocity = transform.forward * speed;
+        }
+
+        private void GroundCheck()
+        {
+            RaycastHit hit = new RaycastHit();
+            if (Physics.Raycast(transform.position, -transform.up, out hit, 10))
+            {
+                _groundNormal = hit.normal;
+            }
+        }
+
+        private void Rotate()
+        {
+            Quaternion toRotation = Quaternion.FromToRotation(transform.up, _groundNormal) * transform.rotation;
+            transform.rotation = toRotation;
+            float rotationInput = _joystick.Horizontal;
+            transform.Rotate(0, rotationInput * _rotationSpeed * Time.deltaTime, 0);
+        }
+
+        private void UseGravity()
+        {
+            Vector3 gravDirection = (transform.position - _planet.transform.position).normalized;
+            _rb.AddForce(gravDirection * -_gravity);
         }
     }
 }

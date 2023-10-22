@@ -1,18 +1,31 @@
+using StaticTags;
 using UnityEngine;
 
-public class WorldConstraint : MonoBehaviour
+namespace WorldPhysics
 {
-    [Header("Transform of parent object")]
-    [SerializeField] private Transform _world;
-
-    private void FixedUpdate()
+    public class WorldConstraint : MonoBehaviour
     {
-        WorldAttraction();
-    }
+        [Header("Transform of parent object")]
+        private Transform _planet;
 
-    private void WorldAttraction()
-    {
-        Quaternion rotation = Quaternion.FromToRotation(-transform.up, _world.position - transform.position);
-        transform.rotation = rotation * transform.rotation;
+        private Transform _cachedTransform;
+
+        private void Start()
+        {
+            _cachedTransform = GetComponent<Transform>();
+            _planet = GameObject.FindGameObjectWithTag(Tags.Planet).transform;
+        }
+
+        private void FixedUpdate()
+        {
+            WorldAttraction();
+        }
+
+        private void WorldAttraction()
+        {
+            Quaternion rotation =
+                Quaternion.FromToRotation(-transform.up, _planet.position - _cachedTransform.position);
+            _cachedTransform.rotation = rotation * transform.rotation;
+        }
     }
 }
