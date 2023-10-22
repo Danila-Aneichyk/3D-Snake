@@ -10,11 +10,11 @@ namespace Objects
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag(Tags.Player))
-            {
-                Destroy(gameObject);
-                OnFoodEaten?.Invoke();
-            }
+            if (!other.gameObject.CompareTag(Tags.Player))
+                return;
+            
+            OnFoodEaten?.Invoke();
+            Destroy(gameObject);
         }
     }
 }

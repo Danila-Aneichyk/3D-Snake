@@ -4,38 +4,38 @@ namespace Spawners
 {
     public class FoodSpawner : MonoBehaviour
     {
-        [SerializeField] private GameObject foodPrefab;
-        [SerializeField] private Transform sphereTransform;
-        [SerializeField] private float spawnRadius = 10.0f;
-        [SerializeField] private float spawnInterval = 5.0f;
-        private float nextSpawnTime;
+        [SerializeField] private GameObject _foodPrefab;
+        [SerializeField] private Transform _sphereTransform;
+        [SerializeField] private float _spawnRadius = 10.0f;
+        [SerializeField] private float _spawnInterval = 5.0f;
+        private float _nextSpawnTime;
 
         private void Start()
         {
-            nextSpawnTime = Time.time + spawnInterval;
+            _nextSpawnTime = Time.time + _spawnInterval;
         }
 
         private void Update()
         {
-            if (Time.time >= nextSpawnTime)
+            if (Time.time >= _nextSpawnTime)
             {
                 SpawnFood();
-                nextSpawnTime = Time.time + spawnInterval;
+                _nextSpawnTime = Time.time + _spawnInterval;
             }
         }
 
         private void SpawnFood()
         {
-            float randomTheta = Random.Range(0f, Mathf.PI * 2); // Угол вокруг оси Z (0-360 градусов).
-            float randomPhi = Random.Range(0f, Mathf.PI); // Угол возвышения над плоскостью XY (0-180 градусов).
+            float randomTheta = Random.Range(0f, Mathf.PI * 2);
+            float randomPhi = Random.Range(0f, Mathf.PI);
 
-            float x = spawnRadius * Mathf.Sin(randomPhi) * Mathf.Cos(randomTheta);
-            float y = spawnRadius * Mathf.Sin(randomPhi) * Mathf.Sin(randomTheta);
-            float z = spawnRadius * Mathf.Cos(randomPhi);
+            float x = _spawnRadius * Mathf.Sin(randomPhi) * Mathf.Cos(randomTheta);
+            float y = _spawnRadius * Mathf.Sin(randomPhi) * Mathf.Sin(randomTheta);
+            float z = _spawnRadius * Mathf.Cos(randomPhi);
 
-            Vector3 foodPosition = sphereTransform.position + new Vector3(x, y, z);
+            Vector3 foodPosition = _sphereTransform.position + new Vector3(x, y, z);
 
-            Instantiate(foodPrefab, foodPosition, Quaternion.identity);
+            Instantiate(_foodPrefab, foodPosition, Quaternion.identity);
         }
     }
 }
