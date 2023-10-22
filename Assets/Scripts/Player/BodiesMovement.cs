@@ -26,17 +26,19 @@ namespace Player
         {
             float sqrDistance = _bodiesDistance * _bodiesDistance;
             Vector3 previousBodyPosition = _transform.position;
+            Quaternion previousBodyRotation = _transform.rotation;
 
             foreach (Transform body in _bodies)
             {
                 if ((body.position - previousBodyPosition).sqrMagnitude > sqrDistance)
                 {
-                    (body.position, previousBodyPosition) = (previousBodyPosition, body.position);
+                    (body.position, body.rotation, previousBodyPosition, previousBodyRotation) =
+                        (previousBodyPosition, previousBodyRotation, body.position, body.rotation);
                 }
                 else
                 {
                     break;
-                }   
+                }
             }
         }
     }
