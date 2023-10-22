@@ -7,7 +7,7 @@ namespace Spawners
         [SerializeField] public GameObject _foodPrefab;
         [SerializeField] private Transform _sphereTransform;
         private float _spawnInterval = 5.0f;
-        private float _planetTransform = 25.5f;
+        private float _planetRadius = 25.5f;
         private float _nextSpawnTime;
 
         private void Start()
@@ -30,7 +30,7 @@ namespace Spawners
 
             float radians = angle * Mathf.Deg2Rad;
 
-            Vector3 foodPosition = _sphereTransform.position + _planetTransform * new Vector3(
+            Vector3 foodPosition = _sphereTransform.position + _planetRadius * new Vector3(
                 Mathf.Cos(radians),
                 Mathf.Sin(radians),
                 0f

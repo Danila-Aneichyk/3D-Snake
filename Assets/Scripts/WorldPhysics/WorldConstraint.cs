@@ -8,8 +8,11 @@ namespace WorldPhysics
         [Header("Transform of parent object")]
         private Transform _planet;
 
+        private Transform _cachedTransform;
+
         private void Start()
         {
+            _cachedTransform = GetComponent<Transform>();
             _planet = GameObject.FindGameObjectWithTag(Tags.Planet).transform;
         }
 
@@ -20,8 +23,9 @@ namespace WorldPhysics
 
         private void WorldAttraction()
         {
-            Quaternion rotation = Quaternion.FromToRotation(-transform.up, _planet.position - transform.position);
-            transform.rotation = rotation * transform.rotation;
+            Quaternion rotation =
+                Quaternion.FromToRotation(-transform.up, _planet.position - _cachedTransform.position);
+            _cachedTransform.rotation = rotation * transform.rotation;
         }
     }
 }
